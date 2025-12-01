@@ -1,64 +1,36 @@
-name: WakaTime All-Time Stats
+name: Update WakaTime Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *' # каждый день в полночь UTC
-  workflow_dispatch: # можно запускать вручную
+    - cron: '0 0 * * *'  # каждый день в полночь
+  workflow_dispatch:  # возможность запускать вручную
 
 jobs:
-  update-wakatime:
+  generate:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm install axios fs
+        run: npm install axios fs-extra svg-builder
 
       - name: Generate WakaTime SVG
         env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
         run: |
-          node <<'EOF'
-          const axios = require('axios');
-          const fs = require('fs');
-
-          const username = 'alexmolt';
-          const url = `https://wakatime.com/api/v1/users/current/stats/all_time`;
-
-          axios.get(url, {
-            headers: { Authorization: `Bearer ${process.env.WAKATIME_API_KEY}` }
-          })
-          .then(res => {
-            const data = res.data.data;
-            let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="300">
-            <style>text { font: 14px sans-serif; }</style>
-            <text x="10" y="20">My WakaTime Stats (All-Time)</text>`;
-
-            let y = 50;
-            for (const lang of data.languages) {
-              svgContent += `<text x="10" y="${y}">${lang.name}: ${lang.percent}% (${lang.text})</text>`;
-              y += 20;
-            }
-            svgContent += '</svg>';
-
-            fs.writeFileSync('waka-stats.svg', svgContent);
-          })
-          .catch(err => {
-            console.error('Error fetching WakaTime stats:', err.message);
-            process.exit(1);
-          });
-          EOF
+          node ./scripts/generate-waka-svg.js
 
       - name: Commit and push SVG
         run: |
-          git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add waka-stats.svg
-          git commit -m "Update WakaTime all-time stats"
+          git commit -m "Update WakaTime SVG"
           git push
