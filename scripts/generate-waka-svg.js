@@ -1,30 +1,44 @@
-import axios from "axios";
-import fs from "fs";
+import fetch from 'node-fetch';
+import fs from 'fs';
 
 const apiKey = process.env.WAKATIME_API_KEY;
-if (!apiKey) throw new Error("Set WAKATIME_API_KEY in secrets");
 
-const url = "https://wakatime.com/api/v1/users/current/stats/all_time";
+if (!apiKey) {
+  console.error("Missing WAKATIME_API_KEY");
+  process.exit(1);
+}
 
-(async () => {
-  const { data } = await axios.get(url, {
-    headers: { Authorization: `Basic ${Buffer.from(apiKey + ":api_token").toString("base64")}` }
+async function getStats() {
+  const res = await fetch(`https://wakatime.com/api/v1/users/current/stats/all_time`, {
+    headers: { Authorization: `Bearer ${apiKey}` },
   });
 
-  const langs = data.data.languages
-    .sort((a, b) => b.text_seconds - a.text_seconds)
-    .slice(0, 10); // топ 10 языков
+  if (!res.ok) {
+    console.error("Error fetching stats:", res.statusText);
+    process.exit(1);
+  }
 
-  const svgLines = langs.map(
-    (l, i) => `<text x="10" y="${30 + i*30}" font-size="16">${l.name}: ${Math.floor(l.text_seconds/3600)} hrs</text>`
-  );
+  return res.json();
+}
 
-  const svg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="300" height="${langs.length*30 + 50}">
-    <text x="10" y="20" font-size="18" font-weight="bold">My WakaTime Stats</text>
-    ${svgLines.join("\n")}
-  </svg>
+function generateSVG(stats) {
+  const lines = stats.data.languages.map(lang => {
+    const hours = Math.floor(lang.text / 60);
+    const minutes = Math.floor(lang.text % 60);
+    return `<text x="10" y="${20 + stats.data.languages.indexOf(lang)*20}" font-size="14">${lang.name}: ${hours}h ${minutes}m</text>`;
+  });
+
+  return `
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="${stats.data.languages.length * 20 + 30}">
+  <rect width="100%" height="100%" fill="#fff"/>
+  <text x="10" y="15" font-size="16" font-weight="bold">My Waka Stats (All-Time)</text>
+  ${lines.join('\n')}
+</svg>
   `;
+}
 
-  fs.writeFileSync("waka-stats.svg", svg);
+(async () => {
+  const stats = await getStats();
+  const svg = generateSVG(stats);
+  fs.writeFileSync('waka-stats.svg', svg);
 })();
