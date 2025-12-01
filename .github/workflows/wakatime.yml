@@ -1,0 +1,17 @@
+name: WakaTime Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # раз в день
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate WakaTime stats
+        uses: amitsingh-007/waka-readme-stats-action@v1
+        with:
+          wakatime_api_key: ${{ secrets.WAKATIME_API_KEY }}
+          github_user_name: alexmolt
