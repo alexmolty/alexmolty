@@ -6,3 +6,4 @@
 
 ![WakaTime Stats](./waka-stats.svg)
 
+![WakaTime Stats](./waka-stats.svg)
