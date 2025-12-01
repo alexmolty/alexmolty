@@ -2,4 +2,6 @@
   
   [![My Wakatime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=alexmolt&layout=compact&theme=algolia)](https://wakatime.com/@alexmolt)
 
-[![My WakaTime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=alexmolt&range=all_time)](https://wakatime.com/@alexmolt)
+# My WakaTime Stats
+
+![WakaTime Stats](waka-stats.svg)
