@@ -6,4 +6,4 @@
 
 ![WakaTime Stats](./waka-stats.svg)
 
-![WakaTime Stats](./waka-stats.svg)
+![My WakaTime Stats](scripts/waka-stats.svg)
