@@ -1,17 +1,64 @@
-name: WakaTime Stats
+name: WakaTime All-Time Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *' # раз в день
-  workflow_dispatch:
+    - cron: '0 0 * * *' # каждый день в полночь UTC
+  workflow_dispatch: # можно запускать вручную
 
 jobs:
-  generate:
+  update-wakatime:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Generate WakaTime stats
-        uses: amitsingh-007/waka-readme-stats-action@v1
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          wakatime_api_key: ${{ secrets.WAKATIME_API_KEY }}
-          github_user_name: alexmolt
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install axios fs
+
+      - name: Generate WakaTime SVG
+        env:
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+        run: |
+          node <<'EOF'
+          const axios = require('axios');
+          const fs = require('fs');
+
+          const username = 'alexmolt';
+          const url = `https://wakatime.com/api/v1/users/current/stats/all_time`;
+
+          axios.get(url, {
+            headers: { Authorization: `Bearer ${process.env.WAKATIME_API_KEY}` }
+          })
+          .then(res => {
+            const data = res.data.data;
+            let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="300">
+            <style>text { font: 14px sans-serif; }</style>
+            <text x="10" y="20">My WakaTime Stats (All-Time)</text>`;
+
+            let y = 50;
+            for (const lang of data.languages) {
+              svgContent += `<text x="10" y="${y}">${lang.name}: ${lang.percent}% (${lang.text})</text>`;
+              y += 20;
+            }
+            svgContent += '</svg>';
+
+            fs.writeFileSync('waka-stats.svg', svgContent);
+          })
+          .catch(err => {
+            console.error('Error fetching WakaTime stats:', err.message);
+            process.exit(1);
+          });
+          EOF
+
+      - name: Commit and push SVG
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add waka-stats.svg
+          git commit -m "Update WakaTime all-time stats"
+          git push
