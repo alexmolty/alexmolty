@@ -19,7 +19,6 @@ Bash             19 mins         _________________________   00.10 %
 
 <!--END_SECTION:waka-->
 
-<!--
-currently not work (04.12.2025):
+
 [![My Wakatime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=alexmolt&layout=compact&theme=algolia)](https://wakatime.com/@alexmolt)
--->
+
