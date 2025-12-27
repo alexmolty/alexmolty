@@ -1,3 +1,4 @@
+Hi! This is my coding activity
 <!--START_SECTION:waka-->
 
 ```txt
@@ -17,7 +18,7 @@ CSV              36 mins         _________________________   00.17 %
 Bash             32 mins         _________________________   00.15 %
 ```
 
-<!--END_SECTION:waka-->
+<!--END_SECTION:waka-->(https://wakatime.com/@alexmolt)
 
 <!--
 [![My Wakatime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=alexmolt&layout=compact&theme=algolia)](https://wakatime.com/@alexmolt)
