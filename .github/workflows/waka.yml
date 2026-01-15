@@ -2,7 +2,7 @@ name: WakaTime Stats
 
 on:
   schedule:
-    - cron: "0 * * * *" # раз в час обновление
+    - cron: "0 */5 * * *" #-> update every 5 hours
   workflow_dispatch:
 
 jobs:
