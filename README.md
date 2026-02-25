@@ -2,12 +2,12 @@ Hi! This is my coding activity
 <!--START_SECTION:waka-->
 
 ```txt
-From: 20 April 2025 - To: 24 February 2026
+From: 20 April 2025 - To: 25 February 2026
 
-Total Time: 452 hrs 38 mins
+Total Time: 452 hrs 42 mins
 
-JavaScript       237 hrs 3 mins        #############____________   51.11 %
-Java             116 hrs 35 mins       ######___________________   25.14 %
+JavaScript       237 hrs 3 mins        #############____________   51.10 %
+Java             116 hrs 40 mins       ######___________________   25.15 %
 TypeScript       61 hrs 7 mins         ###______________________   13.18 %
 CSS              15 hrs 16 mins        #________________________   03.29 %
 HTML             11 hrs 19 mins        #________________________   02.44 %
