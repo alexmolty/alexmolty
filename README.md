@@ -2,13 +2,13 @@ Hi! This is my coding activity
 <!--START_SECTION:waka-->
 
 ```txt
-From: 20 April 2025 - To: 04 May 2026
+From: 20 April 2025 - To: 05 May 2026
 
-Total Time: 549 hrs 5 mins
+Total Time: 549 hrs 48 mins
 
-JavaScript       237 hrs 16 mins       ###########______________   42.35 %
-Java             210 hrs 34 mins       #########________________   37.58 %
-TypeScript       61 hrs 7 mins         ###______________________   10.91 %
+JavaScript       237 hrs 16 mins       ###########______________   42.30 %
+Java             211 hrs 17 mins       #########________________   37.66 %
+TypeScript       61 hrs 7 mins         ###______________________   10.90 %
 CSS              15 hrs 34 mins        #________________________   02.78 %
 HTML             11 hrs 33 mins        #________________________   02.06 %
 Other            11 hrs 12 mins        #________________________   02.00 %
