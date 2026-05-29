@@ -2,20 +2,20 @@ Hi! This is my coding activity
 <!--START_SECTION:waka-->
 
 ```txt
-From: 20 April 2025 - To: 27 May 2026
+From: 20 April 2025 - To: 28 May 2026
 
-Total Time: 568 hrs 48 mins
+Total Time: 569 hrs 12 mins
 
-JavaScript       237 hrs 16 mins       ##########_______________   40.91 %
-Java             229 hrs 32 mins       ##########_______________   39.57 %
-TypeScript       61 hrs 7 mins         ###______________________   10.54 %
+JavaScript       237 hrs 16 mins       ##########_______________   40.88 %
+Java             229 hrs 33 mins       ##########_______________   39.55 %
+TypeScript       61 hrs 7 mins         ###______________________   10.53 %
 CSS              15 hrs 34 mins        #________________________   02.68 %
 HTML             11 hrs 33 mins        _________________________   01.99 %
 Other            11 hrs 12 mins        _________________________   01.93 %
 JSON             6 hrs 43 mins         _________________________   01.16 %
 Markdown         1 hr 33 mins          _________________________   00.27 %
 GitIgnore file   1 hr 26 mins          _________________________   00.25 %
-Text             57 mins               _________________________   00.17 %
+XML              1 hr 6 mins           _________________________   00.19 %
 ```
 
 <!--END_SECTION:waka-->
