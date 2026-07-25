@@ -2,7 +2,7 @@ Hi! This is my coding activity
 <!--START_SECTION:waka-->
 
 ```txt
-From: 20 April 2025 - To: 23 July 2026
+From: 20 April 2025 - To: 24 July 2026
 
 Total Time: 580 hrs 58 mins
 
